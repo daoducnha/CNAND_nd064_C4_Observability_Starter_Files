@@ -45,13 +45,20 @@ def init_tracer(service):
 tracer = init_tracer("trial")
 flask_tracer = FlaskTracing(tracer, True, app)
 
+by_path_counter = metrics.counter(
+    'by_path_counter', 'Request count by request paths',
+    labels={'path': lambda: request.path}
+)
+
 
 @app.route("/")
+@by_path_counter
 def homepage():
     return render_template("main.html")
 
 
 @app.route("/trace")
+@by_path_counter
 def trace():
     def remove_tags(text):
         tag = re.compile(r"<[^>]+>")
