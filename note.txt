@@ -1,0 +1,63 @@
+create cluster  
+    eksctl create cluster --name nhadd-project-3  --region=us-east-1
+    eksctl delete cluster --name nhadd-project-3  --region=us-east-1
+
+config kubernet
+    aws eks update-kubeconfig --region us-east-1 --name nhadd-project-3
+
+install helm
+    curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    kubectl create namespace monitoring
+    helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+    helm repo add stable https://charts.helm.sh/stable
+    helm repo update
+    helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
+
+    helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring --kubeconfig ~/.kube/config
+
+    helm install prometheus prometheus-community/kube-prometheus-stack  --namespace monitoring
+
+Install Jaeger
+    kubectl create namespace observability
+    export jaeger_version=v1.28.0 
+
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+    kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/service_account.yaml
+    kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role.yaml
+    kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role_binding.yaml
+    kubectl create -n observability -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/operator.yaml
+    
+
+Cluster wide Jaeger
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role.yaml
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role_binding.yaml
+Deploy sample app
+
+    kubectl apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/examples/business-application-injected-sidecar.yaml
+    kubectl apply -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/v1.28.0/examples/business-application-injected-sidecar.yaml
+
+Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting-started
+    kubectl apply -n observability -f - <<EOF
+    apiVersion: jaegertracing.io/v1
+    kind: Jaeger
+    metadata:
+        name: simplest
+    EOF
+start application
+    cd Project_Starter_Files-Building_a_Metrics_Dashboard/manifests
+    kubectl apply -f app/
+
+forward jaeger instance:
+    kubectl port-forward -n observability  service/simplest-query --address 0.0.0.0 16686:16686
+
+Exposing Grafana
+    kubectl get pod -n monitoring 
+
+    kubectl port-forward -n monitoring prometheus-grafana-748dc6d64c-sn5x2  3000
+    login: admin/prom-operator
+
+    kubectl port-forward svc/frontend-service 8080:8080
+
+    kubectl port-forward  -n observability jaeger-operator-694cbbb886-299tv 16686
+
+    kubectl  -n observability  port-forward service/simpletest-query --address 0.0.0.0 16686:16686
