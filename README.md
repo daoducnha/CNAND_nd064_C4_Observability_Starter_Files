@@ -17,9 +17,19 @@
 
 ## Describe SLO/SLI
 *TODO:* Describe, in your own words, what the SLIs are, based on an SLO of *monthly uptime* and *request response time*.
+- Service-Level Objective (SLO): is a measurable goal set by the SRE team to ensure a standard level of performance during a specified period of time.
+- Service-Level Indicator (SLI): is a specific metric used to measure the performance of a service.
+- So based on an SLI of *monthly uptime* and *request response time* we can determine SLO measurable goal of application to ensure performance 
+- Example: assumption SLO: 99.5% monthly uptime and request response time should less than 1 second so with avg of SLI indicate the level of performance your service actually, and show you whether you achieved your SLO
 
 ## Creating SLI metrics.
 *TODO:* It is important to know why we want to measure certain metrics for our customer. Describe in detail 5 metrics to measure these SLIs. 
+-   SLI mestris:
+    - Service uptime
+    - Latency
+    - Failure Rate
+    - CPU Usage
+    - Memory Usage
 
 ## Create a Dashboard to measure our SLIs
 *TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
