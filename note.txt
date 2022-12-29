@@ -11,12 +11,27 @@ docker tag frontend  daoducnha29493/frontend
 docker push daoducnha29493/frontend
 
 docker build --platform=linux/amd64  -t backend ./backend
-docker tag backend  daoducnha29493/backend
-docker push daoducnha29493/backend
+docker tag backend  daoducnha29493/backend:v3
+docker push daoducnha29493/backend:v3
+kubectl delete deployment backend-app
+kubectl delete service backend-service
+kubectl apply -f deployment/backend.yaml
+
 
 docker build --platform=linux/amd64  -t trial ./trial
-docker tag trail  daoducnha29493/trial
-docker push daoducnha29493/trial
+docker tag trial daoducnha29493/trial:v2
+docker push daoducnha29493/trial:v2
+kubectl delete deployment trial-app
+kubectl delete service trial-service
+kubectl apply -f deployment/trial.yaml
+
+docker build --platform=linux/amd64  -t frontend ./frontend
+docker tag frontend  daoducnha29493/frontend:v4
+docker push daoducnha29493/frontend:v4
+kubectl delete deployment frontend-app
+kubectl delete service frontend-service
+kubectl apply -f deployment/frontend.yaml
+kubectl port-forward svc/frontend-service 8080:8080
 
 
 kubectl apply -f deployment/ 
@@ -59,6 +74,7 @@ Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting
     metadata:
         name: simplest
     EOF
+    
 start application
     kubectl apply -f deployment 
 
