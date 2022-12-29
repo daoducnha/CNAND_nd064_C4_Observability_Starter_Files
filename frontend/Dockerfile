@@ -12,9 +12,4 @@ RUN apt-get update && \
     pip install --upgrade pip && \
     pip install -r requirements.txt
 
-RUN pip install jaeger-client && \
-    pip install opentracing && \
-    pip install Flask-Opentracing
-
-
 CMD ["gunicorn", "--access-logfile", "-", "--error-logfile", "-", "-w", "4", "-b", "0.0.0.0:8080", "app:app"]
