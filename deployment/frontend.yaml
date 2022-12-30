@@ -1,7 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-app
+  name: frontend
+  labels:
+    name: frontend
+    release: prometheus
+  annotations:
+    sidecar.jaegertracing.io/inject: 'true'
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/path: /metrics
+    prometheus.io/port: "8080"
 spec:
   replicas: 3
   selector:
@@ -14,15 +23,17 @@ spec:
     spec:
       containers:
       - name: frontend
-        # We advise you to build, push and use your own image, instead of using instructor's image.
         image: daoducnha29493/frontend:v4
+        env:
+          - name: JAEGER_HOST
+            value: simpletest-query.default.svc.cluster.local
         ports:
         - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+  name: frontend
 spec:
   selector:
     app: frontend
