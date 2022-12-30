@@ -39,6 +39,9 @@ kubectl apply -f deployment/
 kubectl delete deployment backend-app frontend-app trial-app
 kubectl delete service backend-service frontend-service  trial-service
 
+kubectl create namespace monitoring
+kubectl create namespace observability
+
 install helm
     curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
     kubectl create namespace monitoring
@@ -46,10 +49,6 @@ install helm
     helm repo add stable https://charts.helm.sh/stable
     helm repo update
     helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
-
-    helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring --kubeconfig ~/.kube/config
-
-    helm install prometheus prometheus-community/kube-prometheus-stack  --namespace monitoring
 
 Install Jaeger
     kubectl create namespace observability
@@ -74,7 +73,11 @@ Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting
     metadata:
         name: simplest
     EOF
-    
+
+add jaeger url: simpletest-query.default.svc.cluster.local:16686
+
+https://blog.mphomphego.co.za/blog/2021/07/25/How-to-configure-Jaeger-Data-source-on-Grafana-and-debug-network-issues-with-Bind-utilities.html#debugging-and-troubleshooting
+
 start application
     kubectl apply -f deployment 
 
