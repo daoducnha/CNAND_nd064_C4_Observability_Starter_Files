@@ -26,7 +26,7 @@ spec:
         image: daoducnha29493/frontend:v4
         env:
           - name: JAEGER_HOST
-            value: simpletest-query.default.svc.cluster.local
+            value: simplest-query.observability.svc.cluster.local
         ports:
         - name: frontendport
           containerPort: 8080

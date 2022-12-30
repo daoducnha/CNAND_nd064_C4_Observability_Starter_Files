@@ -37,6 +37,7 @@ kubectl port-forward svc/frontend-service 8080:8080
 kubectl apply -f deployment/ 
 
 kubectl delete deployment backend-app frontend-app trial-app
+kubectl delete deployment backend frontend trial
 kubectl delete service backend-service frontend-service  trial-service
 
 kubectl create namespace monitoring
@@ -92,6 +93,5 @@ Exposing Grafana
 
     kubectl port-forward svc/frontend-service 8080:8080
 
-    kubectl  -n observability  port-forward service/simpletest-query --address 0.0.0.0 16686:16686
 
     
