@@ -10,7 +10,7 @@ metadata:
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
     prometheus.io/path: /metrics
-    prometheus.io/port: "8080"
+    prometheus.io/port: backendport
 spec:
   replicas: 3
   selector:
@@ -29,7 +29,10 @@ spec:
         - name: JAEGER_HOST
           value: simpletest-query.default.svc.cluster.local
         ports:
-        - containerPort: 8081
+        - name: backendport
+          containerPort: 8080
+          protocol: TCP
+
 ---
 apiVersion: v1
 kind: Service
