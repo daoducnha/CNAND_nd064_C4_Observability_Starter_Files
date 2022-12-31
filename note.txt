@@ -75,6 +75,8 @@ Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting
         name: simplest
     EOF
 
+kubectl port-forward  service/simplest-query --address 0.0.0.0 16687:16686
+
 add jaeger url: simpletest-query.default.svc.cluster.local:16686
 
 https://blog.mphomphego.co.za/blog/2021/07/25/How-to-configure-Jaeger-Data-source-on-Grafana-and-debug-network-issues-with-Bind-utilities.html#debugging-and-troubleshooting
@@ -91,7 +93,23 @@ Exposing Grafana
     kubectl port-forward -n monitoring prometheus-grafana-748dc6d64c-zjf2c  3000
     login: admin/prom-operator
 
-    kubectl port-forward svc/frontend-service 8080:8080
+    kubectl port-forward svc/frontend 8080:8080
 
 
+export jaeger_version=v1.28.0
+
+
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/service_account.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role_binding.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/operator.yaml
     
+kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role.yaml
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role_binding.yaml
+
+
+https://github.com/jaegertracing/jaeger-operator#getting-started
+
+
+kubectl port-forward  service/simplest-query --address 0.0.0.0 16687:16686

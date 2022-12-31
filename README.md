@@ -33,7 +33,8 @@
 
 ## Create a Dashboard to measure our SLIs
 *TODO:* Create a dashboard to measure the uptime of the frontend and backend services We will also want to measure to measure 40x and 50x errors. Create a dashboard that show these values over a 24 hour period and take a screenshot.
-
+![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/dashboard1.png?raw=true "up_time")
+![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/dashboard1.png?raw=true "error")
 ## Tracing our Flask App
 *TODO:*  We will create a Jaeger span to measure the processes on the backend. Once you fill in the span, provide a screenshot of it here. Also provide a (screenshot) sample Python file containing a trace and span code used to perform Jaeger traces on the backend service.
 
@@ -60,7 +61,10 @@ Description:
 
 ## Creating SLIs and SLOs
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
-
+    - Application uptime is 99.95% uptime per month
+    - < 99% request succes 
+    - Response latance should be less than 0.1s
+    - Server resource should not more than 70% utillization permonth
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
 

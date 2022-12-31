@@ -6,10 +6,10 @@ metadata:
     app: trial    
   annotations:
     "sidecar.jaegertracing.io/inject": "true"
-    # prometheus.io/scrape: "true"
-    # prometheus.io/path: /metrics
-    # prometheus.io/path: /metrics
-    # prometheus.io/port: trailport
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/path: /metrics
+    prometheus.io/port: trailport
 spec:
   replicas: 3
   selector:
@@ -22,7 +22,6 @@ spec:
     spec:
       containers:
       - name: trial
-        # We advise you to build, push and use your own image, instead of using instructor's image.
         image: daoducnha29493/trial:v2
         env:
           - name: JAEGER_HOST

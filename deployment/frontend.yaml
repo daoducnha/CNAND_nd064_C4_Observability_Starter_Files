@@ -2,15 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /metrics
+    prometheus.io/port: frontendport
   labels:
     name: frontend
     release: prometheus
-  annotations:
-    sidecar.jaegertracing.io/inject: 'true'
-    prometheus.io/scrape: "true"
-    prometheus.io/path: /metrics
-    prometheus.io/path: /metrics
-    prometheus.io/port: frontendport
 spec:
   replicas: 3
   selector:
@@ -22,15 +21,14 @@ spec:
         app: frontend
     spec:
       containers:
-      - name: frontend
-        image: daoducnha29493/frontend:v4
-        env:
-          - name: JAEGER_HOST
-            value: simplest-query.observability.svc.cluster.local
-        ports:
-        - name: frontendport
-          containerPort: 8080
-          protocol: TCP
+        - name: frontend
+          image: daoducnha29493/frontend:v4
+          imagePullPolicy: Always
+          ports:
+          - name: frontendport
+            containerPort: 8080
+            protocol: TCP
+      restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
