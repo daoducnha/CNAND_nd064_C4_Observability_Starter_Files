@@ -24,7 +24,7 @@
 
 ## Creating SLI metrics.
 *TODO:* It is important to know why we want to measure certain metrics for our customer. Describe in detail 5 metrics to measure these SLIs. 
--   SLI mestris:
+SLI mestris:
     - Service uptime
     - Latency
     - Failure Rate
@@ -61,10 +61,11 @@ Description:
 
 ## Creating SLIs and SLOs
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
-    - Application uptime is 99.95% uptime per month
-    - < 99% request succes 
-    - Response latance should be less than 0.1s
-    - Server resource should not more than 70% utillization permonth
+SLOs:
+ - Application uptime is 99.95% uptime per month
+ - < 99% request succes 
+ - Response latance should be less than 0.1s
+ - Server resource should not more than 70% utillization permonth
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
 
