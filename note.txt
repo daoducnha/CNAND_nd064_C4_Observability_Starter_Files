@@ -75,7 +75,7 @@ Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting
         name: simplest
     EOF
 
-kubectl port-forward  service/simplest-query --address 0.0.0.0 16687:16686
+kubectl port-forward  service/simplest-query --address 0.0.0.0 16686:16686
 
 add jaeger url: simpletest-query.default.svc.cluster.local:16686
 
