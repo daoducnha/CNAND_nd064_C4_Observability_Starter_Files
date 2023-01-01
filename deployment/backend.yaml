@@ -2,15 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  labels:
-    name: backend
-    release: prometheus
   annotations:
     "sidecar.jaegertracing.io/inject": "true"
     prometheus.io/scrape: "true"
     prometheus.io/path: /metrics
-    prometheus.io/path: /metrics
     prometheus.io/port: backendport
+  labels:
+    name: backend
+    release: prometheus
 spec:
   replicas: 3
   selector:
