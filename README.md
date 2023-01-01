@@ -64,20 +64,24 @@ Description: Cannot insert star because method "insert" not exist
 ## Creating SLIs and SLOs
 *TODO:* We want to create an SLO guaranteeing that our application has a 99.95% uptime per month. Name four SLIs that you would use to measure the success of this SLO.
 SLOs:
- - Application uptime is 99.9% uptime per month
+ - Application uptime is 99.95% uptime per month
  - Response latance should be less than 0.1s
  - Server resource should not more than 70% utillization permonth
+ - More than 99% request succes 
 ## Building KPIs for our plan
 *TODO*: Now that we have our SLIs and SLOs, create a list of 2-3 KPIs to accurately measure these metrics as well as a description of why those KPIs were chosen. We will make a dashboard for this, but first write them down here.
-- Application uptime is 99.9% uptime per month
-    - Ratio downtime/uptime total service < 0.1 %: it will provide total time up and down of sevices
-    - Ratio downtime/uptime each service < 0.1 %: it will provide total time up and down of each sevice
+- Application uptime is 99.95% uptime per month
+    - Ratio downtime/uptime total service < 0.05 %: it will provide total time up and down of sevices
+    - Ratio downtime/uptime each service < 0.05 %: it will provide total time up and down of each sevice
 - Response latance should be less than 0.1s:
     - Total response latance less than 0.1s: we can determine performance of application
     - Percen latency in each api less than 0.1s: We can determin wich end point has low/hight perfomance
 - Server resource should not more than 70% utillization permonth:
     - CPU using each service < 70%: we can determine wich service need to optimie CPU usage
     - CPU total pod of service usage >70%: we can determine when need to add new replica for this service
+- More than 99% request succes
+    - More than 99% request in all sevice success: We can determine part occur error in this application and can optimize it
+    - More than 99% request in each sevice success: We can determin wich service occour error and build plan to fix it
 ## Final Dashboard
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
 ![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/final.png?raw=true "final")
