@@ -21,26 +21,28 @@ spec:
         app: backend
     spec:
       containers:
-      - name: backend
-        image: daoducnha29493/backend:v4
-        env:
-          - name: JAEGER_HOST
-            value: 10.100.77.136
-        ports:
-        - name: backendport
-          containerPort: 8080
-          protocol: TCP
+        - name: backend
+          image: daoducnha29493/backend:v4
+          imagePullPolicy: Always
+          ports:
+          - name: backendport
+            containerPort: 8080
+            protocol: TCP
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: backend
+  labels:
+    app: backend
 spec:
   selector:
     app: backend
   ports:
-    - port: 8081
-      targetPort: 8080
+    - name: backend
+      protocol: TCP
+      port: 8081
+      targetPort: backendport
   type: LoadBalancer
 ---
 apiVersion: monitoring.coreos.com/v1

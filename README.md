@@ -84,4 +84,15 @@ SLOs:
     - More than 99% request in each sevice success: We can determin wich service occour error and build plan to fix it
 ## Final Dashboard
 *TODO*: Create a Dashboard containing graphs that capture all the metrics of your KPIs and adequately representing your SLIs and SLOs. Include a screenshot of the dashboard here, and write a text description of what graphs are represented in the dashboard.  
-![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/final.png?raw=true "final")
+![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/final_1.png?raw=true "final1")
+![Alt text](https://github.com/daoducnha/CNAND_nd064_C4_Observability_Starter_Files/blob/master/screen_shot/final_2.png?raw=true "final2")
+
+- Container CPU usage: CPU usage each pod
+- Cluster Node CPU usage: CPU usage each cluster node
+- Failure request: Count total requests have status code != 200
+- Success request: Count total request have status code == 200
+- Avg response time request: Calcuate avg latency of request
+- Backend Uptime: time backend sevice running 
+- Trial uptime: time trial service running
+- Frontend uptime: time frontend service running
+- All container Uptine: time all service in application running
