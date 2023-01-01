@@ -11,10 +11,10 @@ docker tag frontend  daoducnha29493/frontend
 docker push daoducnha29493/frontend
 
 docker build --platform=linux/amd64  -t backend ./backend
-docker tag backend  daoducnha29493/backend:v3
-docker push daoducnha29493/backend:v3
-kubectl delete deployment backend-app
-kubectl delete service backend-service
+docker tag backend  daoducnha29493/backend:v4
+docker push daoducnha29493/backend:v4
+kubectl delete deployment backend
+kubectl delete service backend
 kubectl apply -f deployment/backend.yaml
 
 
@@ -28,7 +28,7 @@ kubectl apply -f deployment/trial.yaml
 docker build --platform=linux/amd64  -t frontend ./frontend
 docker tag frontend  daoducnha29493/frontend:v4
 docker push daoducnha29493/frontend:v4
-kubectl delete deployment frontend-app
+kubectl delete deployment frontend
 kubectl delete service frontend-service
 kubectl apply -f deployment/frontend.yaml
 kubectl port-forward svc/frontend-service 8080:8080

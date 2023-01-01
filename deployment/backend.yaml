@@ -22,10 +22,10 @@ spec:
     spec:
       containers:
       - name: backend
-        image: daoducnha29493/backend:v3
+        image: daoducnha29493/backend:v4
         env:
           - name: JAEGER_HOST
-            value: simplest-query.observability.svc.cluster.local
+            value: 10.100.77.136
         ports:
         - name: backendport
           containerPort: 8080

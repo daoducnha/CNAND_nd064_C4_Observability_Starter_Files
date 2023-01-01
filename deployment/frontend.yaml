@@ -22,10 +22,10 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: daoducnha29493/frontend:v4
+        image: daoducnha29493/frontend:v5
         env:
           - name: JAEGER_HOST
-            value: simplest-query.observability.svc.cluster.local
+            value: 10.100.77.136
         ports:
         - name: frontendport
           containerPort: 8080

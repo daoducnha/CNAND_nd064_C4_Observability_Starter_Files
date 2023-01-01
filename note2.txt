@@ -1,0 +1,29 @@
+eksctl create cluster --name nhadd-project-3  --region=us-east-1
+eksctl delete cluster --name nhadd-project-3  --region=us-east-1
+
+
+aws eks update-kubeconfig --region us-east-1 --name nhadd-project-3
+
+kubectl create namespace monitoring
+helm install prometheus prometheus-community/kube-prometheus-stack --namespace monitoring
+
+export jaeger_version=v1.28.0
+
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/crds/jaegertracing.io_jaegers_crd.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/service_account.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/role_binding.yaml
+    kubectl create  -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/operator.yaml
+
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role.yaml
+    kubectl create -f https://raw.githubusercontent.com/jaegertracing/jaeger-operator/${jaeger_version}/deploy/cluster_role_binding.yaml
+
+Create jaeger instance: https://github.com/jaegertracing/jaeger-operator#getting-started
+
+kubectl apply -f deployment 
+
+kubectl port-forward  service/simplest-query --address 0.0.0.0 16686:16686
+kubectl port-forward svc/frontend 8080:8080
+kubectl get pod -n monitoring 
+kubectl port-forward -n monitoring prometheus-grafana-748dc6d64c-zjf2c  3000
+    login: admin/prom-operator
